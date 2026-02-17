@@ -1,0 +1,39 @@
+---
+import type { Lang } from "@/data/resume";
+import { skills, skillLabels, nav } from "@/data/resume";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const labels = skillLabels[lang];
+---
+
+<section id="skills" class="px-6 py-24">
+  <div class="mx-auto max-w-3xl">
+    <div class="animate-on-scroll">
+      <h2 class="mb-2 text-sm font-medium tracking-widest text-accent-blue uppercase">
+        {nav[lang].skills}
+      </h2>
+      <div class="mb-12 h-1 w-12 rounded-full bg-gradient-to-r from-accent-blue to-accent-violet"></div>
+    </div>
+
+    <div class="grid gap-8 sm:grid-cols-2">
+      {Object.entries(skills).map(([key, items], i) => (
+        <div class="animate-on-scroll" style={`animation-delay: ${i * 80}ms`}>
+          <h3 class="mb-3 text-sm font-semibold text-text-primary uppercase tracking-wide">
+            {labels[key]}
+          </h3>
+          <div class="flex flex-wrap gap-2">
+            {items.map((skill: string) => (
+              <span class="rounded-lg border border-border bg-surface px-3 py-1.5 text-sm text-text-secondary transition-colors hover:border-accent-blue/40 hover:text-text-primary">
+                {skill}
+              </span>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,17 @@
+---
+import { meta } from "@/data/resume";
+---
+
+<footer class="border-t border-border px-6 py-8">
+  <div class="mx-auto flex max-w-3xl items-center justify-between text-sm text-text-secondary">
+    <p>&copy; {new Date().getFullYear()} {meta.name}</p>
+    <div class="flex gap-4">
+      <a href={meta.github} target="_blank" rel="noopener noreferrer" class="transition-colors hover:text-text-primary">
+        GitHub
+      </a>
+      <a href={meta.linkedin} target="_blank" rel="noopener noreferrer" class="transition-colors hover:text-text-primary">
+        LinkedIn
+      </a>
+    </div>
+  </div>
+</footer>

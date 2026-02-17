@@ -1,0 +1,45 @@
+---
+import type { Lang } from "@/data/resume";
+import { experience, nav } from "@/data/resume";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+---
+
+<section id="experience" class="px-6 py-24">
+  <div class="mx-auto max-w-3xl">
+    <div class="animate-on-scroll">
+      <h2 class="mb-2 text-sm font-medium tracking-widest text-accent-blue uppercase">
+        {nav[lang].experience}
+      </h2>
+      <div class="mb-12 h-1 w-12 rounded-full bg-gradient-to-r from-accent-blue to-accent-violet"></div>
+    </div>
+
+    <div class="relative border-l border-border pl-8">
+      {experience.map((job, i) => (
+        <div class="animate-on-scroll relative mb-10 last:mb-0" style={`animation-delay: ${i * 80}ms`}>
+          {/* Timeline dot */}
+          <div class="absolute -left-[calc(2rem+5px)] top-1.5 h-2.5 w-2.5 rounded-full border-2 border-accent-blue bg-[#0a0a0a]"></div>
+
+          <p class="mb-1 text-xs font-medium tracking-wide text-text-secondary uppercase">
+            {job.period}
+          </p>
+          <h3 class="text-lg font-semibold text-text-primary">
+            {job.role[lang]}
+          </h3>
+          <p class="mb-2 text-sm font-medium text-accent-blue">
+            {job.company}
+          </p>
+          {job.description && (
+            <p class="text-sm leading-relaxed text-text-secondary">
+              {job.description[lang]}
+            </p>
+          )}
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
