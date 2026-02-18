@@ -37,7 +37,10 @@ export interface Job {
 export const experience: Job[] = [
   {
     company: "Reveni",
-    role: { en: "Founding Engineer & Tech Lead", es: "Founding Engineer & Tech Lead" },
+    role: {
+      en: "Founding Engineer & Tech Lead",
+      es: "Founding Engineer & Tech Lead",
+    },
     period: "Feb 2022 — Present",
     description: {
       en: "Founding engineer at this fintech startup, part of the initial 3-person dev team. Built the platform from scratch, defined the technical architecture, and currently lead a squad. Full ownership of backend (Python, Go), frontend (React), infrastructure (AWS, Docker), and CI/CD pipelines.",
@@ -121,9 +124,20 @@ export const experience: Job[] = [
 export const skills = {
   backend: ["Python", "Go", "Node.js", "Django", "REST", "gRPC"],
   frontend: ["React", "TypeScript", "JavaScript", "HTML/CSS"],
-  ai: ["Claude Code", "Cursor", "Prompt Engineering", "LLM APIs", "AI-Assisted Development"],
+  ai: [
+    "Claude Code",
+    "Cursor",
+    "Prompt Engineering",
+    "LLM APIs",
+    "AI-Assisted Development",
+  ],
   infrastructure: ["Docker", "Kubernetes", "AWS", "GCP", "CI/CD", "Jenkins"],
-  security: ["Pentesting", "Vulnerability Analysis", "SIEM", "Security Auditing"],
+  security: [
+    "Pentesting",
+    "Vulnerability Analysis",
+    "SIEM",
+    "Security Auditing",
+  ],
   databases: ["MongoDB", "PostgreSQL"],
   other: ["Blockchain", "Microservices", "Agile"],
 };
@@ -159,6 +173,17 @@ export interface Project {
 }
 
 export const projects: Project[] = [
+  {
+    name: "cuentas-publicas",
+    description: {
+      en: "Interactive dashboard of Spain's public finances — debt, pensions & COFOG spending",
+      es: "Dashboard fiscal interactivo de España — deuda, pensiones y gasto público COFOG",
+    },
+    tech: "TypeScript",
+    url: "https://github.com/jenarvaezg/cuentas-publicas",
+    homepage: "https://jenarvaezg.github.io/cuentas-publicas/",
+    stars: 0,
+  },
   {
     name: "tu-ipc",
     description: {
