@@ -11,25 +11,19 @@ const { lang } = Astro.props;
 
 <section id="projects" class="px-6 py-24">
   <div class="mx-auto max-w-3xl">
-    <div class="animate-on-scroll">
-      <h2 class="mb-2 text-sm font-medium tracking-widest text-accent-blue uppercase">
-        {nav[lang].projects}
-      </h2>
-      <div class="mb-12 h-1 w-12 rounded-full bg-gradient-to-r from-accent-blue to-accent-violet"></div>
-    </div>
+    <h2 class="mb-12 font-heading text-3xl">
+      {nav[lang].projects}
+    </h2>
 
-    <div class="grid gap-4 sm:grid-cols-2">
-      {projects.map((project, i) => (
-        <div
-          class="animate-on-scroll group rounded-xl border border-border bg-surface p-5 transition-all hover:border-accent-blue/40 hover:bg-surface-hover"
-          style={`animation-delay: ${i * 80}ms`}
-        >
-          <div class="mb-3 flex items-center justify-between">
+    <div class="divide-y divide-border">
+      {projects.map((project) => (
+        <div class="py-5 first:pt-0 last:pb-0">
+          <div class="mb-2 flex items-center justify-between">
             <a
               href={project.url}
               target="_blank"
               rel="noopener noreferrer"
-              class="font-semibold text-text-primary hover:text-accent-blue transition-colors"
+              class="font-semibold text-text-primary transition-colors hover:text-accent"
             >
               {project.name}
             </a>
@@ -40,16 +34,16 @@ const { lang } = Astro.props;
                   {project.stars}
                 </span>
               )}
-              <a href={project.url} target="_blank" rel="noopener noreferrer" class="text-text-secondary hover:text-accent-blue transition-colors">
-                <svg class="h-4 w-4 transition-transform hover:translate-x-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" /></svg>
+              <a href={project.url} target="_blank" rel="noopener noreferrer" class="text-text-secondary transition-colors hover:text-accent">
+                <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" /></svg>
               </a>
             </div>
           </div>
-          <p class="mb-3 text-sm text-text-secondary">
+          <p class="mb-2 text-sm text-text-secondary">
             {project.description[lang]}
           </p>
           <div class="flex items-center gap-2">
-            <span class="inline-block rounded-full bg-accent-blue/10 px-3 py-1 text-xs font-medium text-accent-blue">
+            <span class="rounded-md bg-surface px-2.5 py-1 text-xs text-text-secondary">
               {project.tech}
             </span>
             {project.homepage && (
@@ -57,10 +51,9 @@ const { lang } = Astro.props;
                 href={project.homepage}
                 target="_blank"
                 rel="noopener noreferrer"
-                class="inline-flex items-center gap-1 rounded-full bg-accent-violet/10 px-3 py-1 text-xs font-medium text-accent-violet hover:bg-accent-violet/20 transition-colors"
+                class="text-xs font-medium text-accent transition-colors hover:text-amber-500"
               >
-                <svg class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" /></svg>
-                Live
+                {lang === "en" ? "Live" : "Ver"} →
               </a>
             )}
           </div>
@@ -69,9 +62,9 @@ const { lang } = Astro.props;
     </div>
 
     {/* Advent of Code */}
-    <div class="mt-12 animate-on-scroll">
+    <div class="mt-12">
       <h3 class="mb-6 text-lg font-semibold text-text-primary">
-        {lang === "en" ? "Advent of Code — (almost) a new language each year" : "Advent of Code — (casi) un lenguaje nuevo cada año"}
+        {lang === "en" ? "Advent of Code — (almost) a new language each year" : "Advent of Code — (casi) un lenguaje nuevo cada ano"}
       </h3>
       <div class="flex flex-wrap gap-3">
         {adventOfCode.map((entry) => (
@@ -79,10 +72,10 @@ const { lang } = Astro.props;
             href={`https://github.com/jenarvaezg/${entry.year === 2019 || entry.year <= 2018 ? "adventofcode" : `aoc${entry.year}`}`}
             target="_blank"
             rel="noopener noreferrer"
-            class="group flex items-center gap-2 rounded-lg border border-border bg-surface px-4 py-2 text-sm transition-all hover:border-accent-violet/40"
+            class="flex items-center gap-2 rounded-lg border border-border bg-surface px-4 py-2 text-sm transition-colors hover:border-accent"
           >
             <span class="font-semibold text-text-primary">{entry.year}</span>
-            <span class="text-text-secondary group-hover:text-accent-violet transition-colors">{entry.lang}</span>
+            <span class="text-text-secondary">{entry.lang}</span>
           </a>
         ))}
       </div>

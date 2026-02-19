@@ -16,30 +16,14 @@ const { title = `${meta.name} — Portfolio`, lang } = Astro.props;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="José Enrique Narváez — Founding Engineer & Tech Lead. Full-stack developer specializing in Python, Go, and React." />
+    <meta name="description" content="Jose Enrique Narvaez — Staff Engineer. Building products from zero to scale." />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <title>{title}</title>
   </head>
   <body class="antialiased">
     <slot />
-    <script>
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add("visible");
-              observer.unobserve(entry.target);
-            }
-          });
-        },
-        { threshold: 0.1 }
-      );
-      document.querySelectorAll(".animate-on-scroll").forEach((el) => {
-        observer.observe(el);
-      });
-    </script>
   </body>
 </html>

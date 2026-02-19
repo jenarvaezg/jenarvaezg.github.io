@@ -11,26 +11,20 @@ const { lang } = Astro.props;
 
 <section id="education" class="px-6 py-24">
   <div class="mx-auto max-w-3xl">
-    <div class="animate-on-scroll">
-      <h2 class="mb-2 text-sm font-medium tracking-widest text-accent-blue uppercase">
-        {nav[lang].education}
-      </h2>
-      <div class="mb-12 h-1 w-12 rounded-full bg-gradient-to-r from-accent-blue to-accent-violet"></div>
-    </div>
+    <h2 class="mb-12 font-heading text-3xl">
+      {nav[lang].education}
+    </h2>
 
-    <div class="grid gap-4">
-      {education.map((edu, i) => (
-        <div
-          class="animate-on-scroll rounded-xl border border-border bg-surface p-5 transition-colors hover:border-accent-blue/40"
-          style={`animation-delay: ${i * 80}ms`}
-        >
+    <div class="space-y-8">
+      {education.map((edu) => (
+        <div>
           <p class="mb-1 text-xs font-medium tracking-wide text-text-secondary uppercase">
             {edu.period}
           </p>
           <h3 class="text-lg font-semibold text-text-primary">
             {edu.degree[lang]}
           </h3>
-          <p class="text-sm font-medium text-accent-blue">
+          <p class="text-sm font-medium text-accent">
             {edu.institution}
           </p>
           {edu.description && (

@@ -1,6 +1,6 @@
 ---
 import type { Lang } from "@/data/resume";
-import { meta, nav } from "@/data/resume";
+import { nav } from "@/data/resume";
 
 interface Props {
   lang: Lang;
@@ -12,9 +12,9 @@ const otherLang = lang === "en" ? "es" : "en";
 const otherLangUrl = lang === "en" ? "/es/" : "/";
 ---
 
-<header id="header" class="fixed top-0 z-50 w-full border-b border-transparent bg-[#0a0a0a]/80 backdrop-blur-lg transition-colors duration-300">
+<header id="header" class="fixed top-0 z-50 w-full border-b border-transparent bg-[#0c0a09]/80 backdrop-blur-lg transition-colors duration-300">
   <div class="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
-    <a href={lang === "en" ? "/" : "/es/"} class="text-lg font-bold gradient-text">
+    <a href={lang === "en" ? "/" : "/es/"} class="font-heading text-xl text-accent">
       JE
     </a>
 
@@ -29,7 +29,7 @@ const otherLangUrl = lang === "en" ? "/es/" : "/";
       ))}
       <a
         href={otherLangUrl}
-        class="ml-2 rounded-full border border-border px-3 py-1 text-xs font-medium text-text-secondary transition-colors hover:border-accent-blue hover:text-text-primary"
+        class="ml-2 rounded-full border border-border px-3 py-1 text-xs font-medium text-text-secondary transition-colors hover:border-accent hover:text-text-primary"
       >
         {otherLang.toUpperCase()}
       </a>
@@ -58,7 +58,7 @@ const otherLangUrl = lang === "en" ? "/es/" : "/";
       ))}
       <a
         href={otherLangUrl}
-        class="inline-flex w-fit rounded-full border border-border px-3 py-1 text-xs font-medium text-text-secondary transition-colors hover:border-accent-blue hover:text-text-primary"
+        class="inline-flex w-fit rounded-full border border-border px-3 py-1 text-xs font-medium text-text-secondary transition-colors hover:border-accent hover:text-text-primary"
       >
         {otherLang.toUpperCase()}
       </a>

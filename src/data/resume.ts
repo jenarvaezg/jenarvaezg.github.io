@@ -1,8 +1,8 @@
 export type Lang = "en" | "es";
 
 export const meta = {
-  name: "José Enrique Narváez",
-  fullName: "José Enrique Narváez Gago",
+  name: "Jose Enrique Narvaez",
+  fullName: "Jose Enrique Narvaez Gago",
   email: "jenarvaezg@gmail.com",
   github: "https://github.com/jenarvaezg",
   linkedin: "https://www.linkedin.com/in/jenarvaezg/",
@@ -11,27 +11,27 @@ export const meta = {
 
 export const hero: Record<Lang, { title: string; subtitle: string }> = {
   en: {
-    title: "Founding Engineer & Tech Lead",
+    title: "Staff Engineer",
     subtitle:
-      "Building products from zero to one. Full-stack engineer with a security mindset.",
+      "Building products from zero to scale. Security background, economics curiosity.",
   },
   es: {
-    title: "Founding Engineer & Tech Lead",
+    title: "Staff Engineer",
     subtitle:
-      "Construyendo productos de cero a uno. Ingeniero full-stack con mentalidad de seguridad.",
+      "Construyendo productos de cero a escala. Formacion en seguridad, curiosidad por la economia.",
   },
 };
 
 export const about: Record<Lang, string> = {
-  en: `I'm a full-stack engineer with 10+ years of experience building products across fintech, security, and e-commerce. As a founding engineer at Reveni, I helped build the product from scratch and currently lead a squad. My backend toolkit centers on Python and Go, with React on the frontend — but I'm a polyglot at heart: I've shipped production code in half a dozen languages and enjoy picking up new ones through Advent of Code every December. My career started in cybersecurity — penetration testing, vulnerability research, incident response — and that security-first mindset still shapes every system I design. I'm also currently pursuing a Master's in Economics & Public Policy, broadening my perspective beyond engineering.`,
-  es: `Soy ingeniero full-stack con más de 10 años de experiencia construyendo productos en fintech, seguridad y e-commerce. Como ingeniero fundador en Reveni, ayudé a construir el producto desde cero y actualmente lidero un squad. Mi stack principal en backend es Python y Go, con React en frontend, pero soy políglota por vocación: he trabajado profesionalmente con media docena de lenguajes y disfruto aprendiendo otros nuevos con el Advent of Code cada diciembre. Mi carrera empezó en ciberseguridad — tests de intrusión, investigación de vulnerabilidades, respuesta ante incidentes — y esa mentalidad security-first sigue definiendo cada sistema que diseño. Actualmente estoy cursando un Máster en Economía y Políticas Públicas, ampliando mi perspectiva más allá de la ingeniería.`,
+  en: "Founding engineer at Reveni, where I helped build the platform from the ground up as part of a small initial team that grew to 15+ engineers through Series A. Before fintech, I spent years in cybersecurity — pentesting, vulnerability research, incident response. Currently finishing a Master's in Economics & Public Policy.",
+  es: "Ingeniero fundador en Reveni, donde ayude a construir la plataforma desde cero como parte de un equipo inicial pequeno que crecio a mas de 15 ingenieros a traves de la Serie A. Antes del fintech, pase anos en ciberseguridad — pentesting, investigacion de vulnerabilidades, respuesta ante incidentes. Actualmente terminando un Master en Economia y Politicas Publicas.",
 };
 
 export interface Job {
   company: string;
   role: Record<Lang, string>;
   period: string;
-  description?: Record<Lang, string>;
+  bullets?: Record<Lang, string[]>;
 }
 
 export const experience: Job[] = [
@@ -42,124 +42,167 @@ export const experience: Job[] = [
       es: "Founding Engineer & Tech Lead",
     },
     period: "Feb 2022 — Present",
-    description: {
-      en: "Founding engineer at this fintech startup, part of the initial 3-person dev team. Built the platform from scratch, defined the technical architecture, and currently lead a squad. Full ownership of backend (Python, Go), frontend (React), infrastructure (AWS, Docker), and CI/CD pipelines.",
-      es: "Ingeniero fundador en esta startup fintech, parte del equipo inicial de 3 desarrolladores. Construí la plataforma desde cero, definí la arquitectura técnica y actualmente lidero un squad. Ownership total del backend (Python, Go), frontend (React), infraestructura (AWS, Docker) y pipelines de CI/CD.",
+    bullets: {
+      en: [
+        "Part of the founding engineering team; helped build the platform from scratch (Python, Go, React, DigitalOcean)",
+        "Team grew from 3 to 15+ engineers as the company raised ~$20M (Series A €7.5M)",
+        "Co-defined technical architecture, CI/CD pipelines, and engineering culture",
+        "Contributed to international expansion across multiple European markets",
+      ],
+      es: [
+        "Parte del equipo fundador de ingenieria; ayude a construir la plataforma desde cero (Python, Go, React, DigitalOcean)",
+        "El equipo crecio de 3 a mas de 15 ingenieros mientras la empresa levanto ~$20M (Serie A €7,5M)",
+        "Co-defini la arquitectura tecnica, pipelines de CI/CD y cultura de ingenieria",
+        "Contribui a la expansion internacional en varios mercados europeos",
+      ],
     },
   },
   {
     company: "JOOR",
     role: { en: "Senior Software Engineer", es: "Senior Software Engineer" },
     period: "Apr 2021 — Feb 2022",
-    description: {
-      en: "Backend engineer at this B2B wholesale fashion marketplace. Specialized in JOOR Pay features and led the refactoring of a legacy architecture, managing a team of external consultants.",
-      es: "Ingeniero backend en este marketplace B2B de moda al por mayor. Me especialicé en las funcionalidades de JOOR Pay y lideré la refactorización de una arquitectura legacy, gestionando un equipo de consultores externos.",
+    bullets: {
+      en: [
+        "Backend engineer at this B2B wholesale fashion marketplace",
+        "Built JOOR Pay features and led refactoring of legacy architecture (React, Django, GraphQL)",
+        "Managed a team of external consultants during the architecture migration",
+      ],
+      es: [
+        "Ingeniero backend en este marketplace B2B de moda al por mayor",
+        "Desarrolle funcionalidades de JOOR Pay y lidere la refactorizacion de arquitectura legacy (React, Django, GraphQL)",
+        "Gestion de un equipo de consultores externos durante la migracion de arquitectura",
+      ],
     },
   },
   {
     company: "Aplazame",
-    role: { en: "Backend Tech Lead", es: "Backend Tech Lead" },
-    period: "Apr 2020 — Apr 2021",
-    description: {
-      en: "Led the backend team at this buy-now-pay-later fintech. Drove architectural decisions, mentored engineers, and improved system performance and reliability under growing transaction volumes.",
-      es: "Lideré el equipo de backend en esta fintech de pago a plazos. Impulsé decisiones de arquitectura, mentoricé ingenieros y mejoré el rendimiento y fiabilidad del sistema bajo volúmenes de transacciones crecientes.",
+    role: {
+      en: "Software Engineer → Backend Tech Lead",
+      es: "Software Engineer → Backend Tech Lead",
     },
-  },
-  {
-    company: "Aplazame",
-    role: { en: "Software Engineer", es: "Software Engineer" },
-    period: "May 2019 — Apr 2020",
-    description: {
-      en: "Backend development on the core payment processing platform. Built and maintained microservices handling financial transactions, integrations with payment providers, and risk assessment systems.",
-      es: "Desarrollo backend en la plataforma core de procesamiento de pagos. Construí y mantuve microservicios de transacciones financieras, integraciones con proveedores de pago y sistemas de evaluación de riesgo.",
+    period: "May 2019 — Apr 2021",
+    bullets: {
+      en: [
+        "Promoted from IC to Tech Lead within a year at this BNPL fintech",
+        "Built and maintained microservices handling financial transactions and risk assessment",
+        "Drove architectural decisions and mentored junior engineers",
+      ],
+      es: [
+        "Promocionado de IC a Tech Lead en menos de un ano en esta fintech BNPL",
+        "Construi y mantuve microservicios de transacciones financieras y evaluacion de riesgo",
+        "Impulse decisiones de arquitectura y mentorice ingenieros junior",
+      ],
     },
   },
   {
     company: "Paradigma Digital",
     role: { en: "Software Engineer", es: "Software Engineer" },
     period: "Aug 2018 — Apr 2019",
-    description: {
-      en: "Software consultancy embedded with enterprise clients. Worked at JOOR building features with React, Django, and GraphQL. Then joined Lowi (Vodafone), contributing to a 40+ member nexus team using Django.",
-      es: "Consultoría de software integrado en clientes enterprise. Trabajé en JOOR desarrollando funcionalidades con React, Django y GraphQL. Después me incorporé a Lowi (Vodafone), colaborando en un equipo nexus de más de 40 miembros usando Django.",
-    },
-  },
-  {
-    company: "Grant Thornton Spain",
-    role: { en: "Blockchain Consultant", es: "Consultor Blockchain" },
-    period: "Jun 2018 — Aug 2018",
-    description: {
-      en: "Consulted on blockchain technology and its applications for enterprise use cases, evaluating feasibility and designing proof-of-concept solutions.",
-      es: "Consultoría en tecnología blockchain y sus aplicaciones empresariales, evaluando viabilidad y diseñando soluciones proof-of-concept.",
+    bullets: {
+      en: [
+        "Software consultancy embedded with enterprise clients (JOOR, Lowi/Vodafone)",
+        "Built features with React, Django, and GraphQL across multiple client projects",
+      ],
+      es: [
+        "Consultoria de software integrado en clientes enterprise (JOOR, Lowi/Vodafone)",
+        "Desarrolle funcionalidades con React, Django y GraphQL en varios proyectos de clientes",
+      ],
     },
   },
   {
     company: "BBVA Next Technologies",
-    role: { en: "SecDev", es: "SecDev" },
+    role: { en: "Security Developer", es: "Security Developer" },
     period: "Apr 2017 — Jun 2018",
-    description: {
-      en: "Part of Chimera, a developer security product. Full-stack development of microservices in Python, Go, and Node.js with a React frontend. Infrastructure with Docker, Kubernetes, Jenkins, and AWS. Also led internal training sessions for new graduates.",
-      es: "Parte de Chimera, un producto de seguridad para desarrolladores. Desarrollo full-stack de microservicios en Python, Go y Node.js con frontend en React. Infraestructura con Docker, Kubernetes, Jenkins y AWS. También impartí formación interna a nuevos graduados.",
+    bullets: {
+      en: [
+        "Built Chimera, a developer security product — full-stack microservices (Python, Go, Node.js, React)",
+        "Infrastructure with Docker, Kubernetes, Jenkins, and AWS",
+        "Led internal training sessions for new graduate engineers",
+      ],
+      es: [
+        "Desarrolle Chimera, producto de seguridad para desarrolladores — microservicios full-stack (Python, Go, Node.js, React)",
+        "Infraestructura con Docker, Kubernetes, Jenkins y AWS",
+        "Imparti formacion interna a nuevos ingenieros graduados",
+      ],
     },
   },
   {
     company: "SIA Group",
     role: { en: "Security Consultant", es: "Consultor de Seguridad" },
     period: "Jul 2016 — Apr 2017",
-    description: {
-      en: "Black-box and white-box penetration testing on external/internal systems and physical devices. Web application and source code auditing. Vulnerability analysis with Metasploit. Built a malware analysis lab with Cuckoo. Security incident management and response.",
-      es: "Tests de intrusión caja negra y blanca en sistemas externos/internos y dispositivos físicos. Auditoría de aplicaciones web y código fuente. Análisis de vulnerabilidades con Metasploit. Creación de laboratorio de malware con Cuckoo. Gestión y respuesta ante incidentes de seguridad.",
+    bullets: {
+      en: [
+        "Black-box and white-box penetration testing on external/internal systems",
+        "Web application and source code auditing; vulnerability analysis with Metasploit",
+        "Built a malware analysis lab with Cuckoo; security incident management",
+      ],
+      es: [
+        "Tests de intrusion caja negra y blanca en sistemas externos/internos",
+        "Auditoria de aplicaciones web y codigo fuente; analisis de vulnerabilidades con Metasploit",
+        "Creacion de laboratorio de malware con Cuckoo; gestion de incidentes de seguridad",
+      ],
     },
   },
   {
-    company: "BTC fácil",
+    company: "BTC facil",
     role: { en: "Developer", es: "Desarrollador" },
     period: "Nov 2015 — Jul 2016",
-    description: {
-      en: "Built the software stack for Bitcoin ATMs using Python/Django, JavaScript, and C. Responsible for both development and security of the systems handling cryptocurrency transactions.",
-      es: "Desarrollé el stack de software para cajeros de Bitcoin usando Python/Django, JavaScript y C. Responsable tanto del desarrollo como de la seguridad de los sistemas que gestionaban transacciones de criptomonedas.",
+    bullets: {
+      en: [
+        "Built the software stack for Bitcoin ATMs (Python/Django, JavaScript, C)",
+        "Responsible for both development and security of cryptocurrency transaction systems",
+      ],
+      es: [
+        "Desarrolle el stack de software para cajeros de Bitcoin (Python/Django, JavaScript, C)",
+        "Responsable del desarrollo y seguridad de los sistemas de transacciones de criptomonedas",
+      ],
     },
   },
 ];
 
-export const skills = {
-  backend: ["Python", "Go", "Node.js", "Django", "REST", "gRPC"],
+export const skills: Record<string, string[]> = {
+  backend: ["Python", "Go", "Node.js", "Django", "REST", "gRPC", "GraphQL"],
   frontend: ["React", "TypeScript", "JavaScript", "HTML/CSS"],
-  ai: [
-    "Claude Code",
-    "Cursor",
-    "Prompt Engineering",
-    "LLM APIs",
-    "AI-Assisted Development",
+  infrastructure: [
+    "Docker",
+    "Kubernetes",
+    "AWS",
+    "GCP",
+    "Terraform",
+    "CI/CD",
+    "Redis",
   ],
-  infrastructure: ["Docker", "Kubernetes", "AWS", "GCP", "CI/CD", "Jenkins"],
   security: [
     "Pentesting",
     "Vulnerability Analysis",
     "SIEM",
     "Security Auditing",
   ],
-  databases: ["MongoDB", "PostgreSQL"],
-  other: ["Blockchain", "Microservices", "Agile"],
+  databases: ["PostgreSQL", "MongoDB"],
+  practices: [
+    "Technical Leadership",
+    "Microservices",
+    "Agile",
+    "System Design",
+  ],
 };
 
 export const skillLabels: Record<Lang, Record<string, string>> = {
   en: {
     backend: "Backend",
     frontend: "Frontend",
-    ai: "AI & Developer Tools",
     infrastructure: "Infrastructure",
     security: "Security",
     databases: "Databases",
-    other: "Other",
+    practices: "Practices & Leadership",
   },
   es: {
     backend: "Backend",
     frontend: "Frontend",
-    ai: "IA & Herramientas de Desarrollo",
     infrastructure: "Infraestructura",
     security: "Seguridad",
     databases: "Bases de datos",
-    other: "Otros",
+    practices: "Practicas & Liderazgo",
   },
 };
 
@@ -177,11 +220,11 @@ export const projects: Project[] = [
     name: "cuentas-publicas",
     description: {
       en: "Interactive dashboard of Spain's public finances — debt, pensions & COFOG spending",
-      es: "Dashboard fiscal interactivo de España — deuda, pensiones y gasto público COFOG",
+      es: "Dashboard fiscal interactivo de Espana — deuda, pensiones y gasto publico COFOG",
     },
     tech: "TypeScript",
     url: "https://github.com/jenarvaezg/cuentas-publicas",
-    homepage: "https://jenarvaezg.github.io/cuentas-publicas/",
+    homepage: "https://cuentas-publicas.es",
     stars: 0,
   },
   {
@@ -196,54 +239,14 @@ export const projects: Project[] = [
     stars: 2,
   },
   {
-    name: "MagicHub",
-    description: {
-      en: "Backend for magichub.io — a platform for magic enthusiasts",
-      es: "Backend para magichub.io — una plataforma para aficionados a la magia",
-    },
-    tech: "Go",
-    url: "https://github.com/jenarvaezg/MagicHub",
-    stars: 3,
-  },
-  {
     name: "cunhaobot",
     description: {
-      en: "Telegram bot that talks like a Spanish cuñado",
-      es: "Bot de Telegram que habla como un cuñado",
+      en: "Telegram bot that talks like a Spanish cunado — 6 stars, peak open source",
+      es: "Bot de Telegram que habla como un cunado — 6 estrellas, el pico del open source",
     },
     tech: "Python",
     url: "https://github.com/jenarvaezg/cunhaobot",
     stars: 6,
-  },
-  {
-    name: "vigenere_breaker",
-    description: {
-      en: "XOR-Vigenère cipher breaker with key length guessing",
-      es: "Descifrador de Vigenère-XOR con adivinación de longitud de clave",
-    },
-    tech: "C",
-    url: "https://github.com/jenarvaezg/vigenere_breaker",
-    stars: 2,
-  },
-  {
-    name: "ctff",
-    description: {
-      en: "Capture The Flag Framework",
-      es: "Framework para Capture The Flag",
-    },
-    tech: "Go",
-    url: "https://github.com/jenarvaezg/ctff",
-    stars: 0,
-  },
-  {
-    name: "eth-scrapper",
-    description: {
-      en: "Ethereum blockchain scraper",
-      es: "Scraper de la blockchain de Ethereum",
-    },
-    tech: "Go",
-    url: "https://github.com/jenarvaezg/eth-scrapper",
-    stars: 1,
   },
 ];
 
@@ -266,40 +269,56 @@ export interface Education {
 
 export const education: Education[] = [
   {
-    institution: "Universidad de las Hespérides",
+    institution: "Universidad de las Hesperides",
     degree: {
       en: "Master in Economics & Public Policy",
-      es: "Máster en Economía y Políticas Públicas",
+      es: "Master en Economia y Politicas Publicas",
     },
     period: "2025",
     description: {
       en: "Broadening perspective beyond engineering into economic analysis and policy design.",
-      es: "Ampliando perspectiva más allá de la ingeniería hacia el análisis económico y el diseño de políticas.",
+      es: "Ampliando perspectiva mas alla de la ingenieria hacia el analisis economico y el diseno de politicas.",
     },
   },
   {
     institution: "Universidad Carlos III de Madrid",
     degree: {
       en: "MSc in Cybersecurity",
-      es: "Máster Universitario en Ciberseguridad",
+      es: "Master Universitario en Ciberseguridad",
     },
     period: "2016 — 2017",
     description: {
-      en: "Specialization in software security, ethical hacking, and cyber defense. Published work on introduction to cybersecurity and ethical hacking.",
-      es: "Especialización en seguridad del software, hacking ético y ciberdefensa. Publicación sobre introducción a la ciberseguridad y hacking ético.",
+      en: "Specialization in software security, ethical hacking, and cyber defense.",
+      es: "Especializacion en seguridad del software, hacking etico y ciberdefensa.",
     },
   },
   {
     institution: "Universidad Rey Juan Carlos",
     degree: {
       en: "BSc in Telematics Engineering",
-      es: "Grado en Ingeniería Telemática",
+      es: "Grado en Ingenieria Telematica",
     },
     period: "2012 — 2016",
     description: {
-      en: "Honors distinctions (Matrículas de Honor). Special award for best architecture project.",
-      es: "Matrículas de Honor. Premio especial a la mejor arquitectura.",
+      en: "Honors distinctions (Matriculas de Honor). Special award for best architecture project.",
+      es: "Matriculas de Honor. Premio especial a la mejor arquitectura.",
     },
+  },
+];
+
+export interface Language {
+  name: Record<Lang, string>;
+  level: Record<Lang, string>;
+}
+
+export const languages: Language[] = [
+  {
+    name: { en: "Spanish", es: "Espanol" },
+    level: { en: "Native", es: "Nativo" },
+  },
+  {
+    name: { en: "English", es: "Ingles" },
+    level: { en: "Professional", es: "Profesional" },
   },
 ];
 
@@ -307,17 +326,19 @@ export const nav: Record<Lang, Record<string, string>> = {
   en: {
     about: "About",
     experience: "Experience",
-    projects: "Projects",
     skills: "Skills",
+    projects: "Projects",
     education: "Education",
+    languages: "Languages",
     contact: "Contact",
   },
   es: {
-    about: "Sobre mí",
+    about: "Sobre mi",
     experience: "Experiencia",
-    projects: "Proyectos",
     skills: "Habilidades",
-    education: "Educación",
+    projects: "Proyectos",
+    education: "Educacion",
+    languages: "Idiomas",
     contact: "Contacto",
   },
 };
