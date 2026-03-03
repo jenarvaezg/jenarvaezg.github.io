@@ -20,20 +20,20 @@ const { lang } = Astro.props;
         <div class="relative mb-10 last:mb-0">
           <div class="absolute -left-[calc(2rem+5px)] top-1.5 h-2.5 w-2.5 rounded-full border-2 border-accent bg-[#0c0a09]"></div>
 
-          <p class="mb-1 text-xs font-medium tracking-wide text-text-secondary uppercase">
+          <p class="mb-1 text-xs font-medium tracking-wide text-text-secondary/60 uppercase">
             {job.period}
           </p>
           <h3 class="text-lg font-semibold text-text-primary">
             {job.role[lang]}
           </h3>
-          <p class="mb-2 text-sm font-medium text-accent">
+          <p class="mb-3 text-sm font-medium text-accent">
             {job.company}
           </p>
           {job.bullets && (
-            <ul class="space-y-1">
+            <ul class="space-y-1.5">
               {job.bullets[lang].map((bullet) => (
-                <li class="flex gap-2 text-sm leading-relaxed text-text-secondary">
-                  <span class="mt-2 h-1 w-1 shrink-0 rounded-full bg-text-secondary"></span>
+                <li class="flex gap-2.5 text-sm leading-relaxed text-text-secondary/80">
+                  <span class="mt-2 h-1 w-1 shrink-0 rounded-full bg-text-secondary/50"></span>
                   {bullet}
                 </li>
               ))}

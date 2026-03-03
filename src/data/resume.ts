@@ -217,6 +217,17 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    name: "loquevotan",
+    description: {
+      en: "Explore how each representative votes in the Spanish Congress. Parliamentary transparency for citizens.",
+      es: "Consulta como vota cada diputado en el Congreso. Transparencia parlamentaria para la ciudadania.",
+    },
+    tech: "Vue / Python",
+    url: "https://github.com/jenarvaezg/loquevotan",
+    homepage: "https://loquevotan.es",
+    stars: 0,
+  },
+  {
     name: "cuentas-publicas",
     description: {
       en: "Interactive dashboard of Spain's public finances — debt, pensions & COFOG spending",
@@ -330,7 +341,6 @@ export const nav: Record<Lang, Record<string, string>> = {
     projects: "Projects",
     education: "Education",
     languages: "Languages",
-    contact: "Contact",
   },
   es: {
     about: "Sobre mi",
@@ -339,6 +349,5 @@ export const nav: Record<Lang, Record<string, string>> = {
     projects: "Proyectos",
     education: "Educacion",
     languages: "Idiomas",
-    contact: "Contacto",
   },
 };
