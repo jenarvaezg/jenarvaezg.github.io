@@ -112,7 +112,7 @@ export const experience: Job[] = [
   {
     company: "BBVA Next Technologies",
     role: { en: "Security Developer", es: "Security Developer" },
-    period: "Apr 2017 — Jun 2018",
+    period: "Apr 2017 — Jul 2018",
     bullets: {
       en: [
         "Built Chimera, a developer security product — full-stack microservices (Python, Go, Node.js, React)",
@@ -279,7 +279,7 @@ export const languages: Language[] = [
   },
   {
     name: { en: "English", es: "Ingles" },
-    level: { en: "Professional", es: "Profesional" },
+    level: { en: "Bilingual", es: "Bilingue" },
   },
 ];
 
