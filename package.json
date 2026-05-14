@@ -8,6 +8,7 @@
     "build": "astro build",
     "check": "astro check",
     "preview": "astro preview",
+    "sync:profile": "node scripts/generate-profile-readme.mjs",
     "prepare": "husky"
   },
   "dependencies": {
