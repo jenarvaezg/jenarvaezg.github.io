@@ -32,8 +32,8 @@
   {
     "name": "cunhaobot",
     "description": {
-      "en": "Telegram bot that talks like a Spanish cunado",
-      "es": "Bot de Telegram que habla como un cunado"
+      "en": "Telegram bot that talks like a Spanish cunado — the know-it-all brother-in-law parody",
+      "es": "Bot de Telegram que habla como un cunado — el que sienta catedra en cualquier sobremesa"
     },
     "tech": "Python",
     "url": "https://github.com/jenarvaezg/cunhaobot"
