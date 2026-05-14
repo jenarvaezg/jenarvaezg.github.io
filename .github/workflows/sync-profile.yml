@@ -1,0 +1,60 @@
+name: Sync profile README
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - src/data/projects.json
+      - src/data/aoc.json
+      - scripts/generate-profile-readme.mjs
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout portfolio (canonical source)
+        uses: actions/checkout@v4
+
+      - name: Checkout profile repo
+        uses: actions/checkout@v4
+        with:
+          repository: jenarvaezg/jenarvaezg
+          token: ${{ secrets.PROFILE_SYNC_TOKEN }}
+          path: profile-repo
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Regenerate profile README
+        run: node scripts/generate-profile-readme.mjs --write profile-repo/README.md
+
+      - name: Create or update rolling PR
+        id: cpr
+        uses: peter-evans/create-pull-request@v7
+        with:
+          path: profile-repo
+          token: ${{ secrets.PROFILE_SYNC_TOKEN }}
+          branch: sync/profile-readme
+          base: main
+          commit-message: "chore: sync profile README from portfolio"
+          title: "chore: sync profile README"
+          body: |
+            Auto-generated from [`jenarvaezg.github.io`](https://github.com/jenarvaezg/jenarvaezg.github.io)
+            (`src/data/projects.json` / `src/data/aoc.json`).
+
+            Triggered by commit ${{ github.sha }}.
+          delete-branch: true
+
+      - name: Enable auto-merge
+        if: steps.cpr.outputs.pull-request-number
+        uses: peter-evans/enable-pull-request-automerge@v3
+        with:
+          token: ${{ secrets.PROFILE_SYNC_TOKEN }}
+          repository: jenarvaezg/jenarvaezg
+          pull-request-number: ${{ steps.cpr.outputs.pull-request-number }}
+          merge-method: squash
