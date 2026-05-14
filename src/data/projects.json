@@ -1,0 +1,41 @@
+[
+  {
+    "name": "loquevotan",
+    "description": {
+      "en": "Explore how each representative votes in the Spanish Congress. Parliamentary transparency for citizens.",
+      "es": "Consulta como vota cada diputado en el Congreso. Transparencia parlamentaria para la ciudadania."
+    },
+    "tech": "Vue / Python",
+    "url": "https://github.com/jenarvaezg/loquevotan",
+    "homepage": "https://loquevotan.es"
+  },
+  {
+    "name": "cuentas-publicas",
+    "description": {
+      "en": "Interactive dashboard of Spain's public finances — debt, pensions & COFOG spending",
+      "es": "Dashboard fiscal interactivo de Espana — deuda, pensiones y gasto publico COFOG"
+    },
+    "tech": "TypeScript",
+    "url": "https://github.com/jenarvaezg/cuentas-publicas",
+    "homepage": "https://cuentas-publicas.es"
+  },
+  {
+    "name": "tu-ipc",
+    "description": {
+      "en": "Personal CPI calculator based on Spain's INE data",
+      "es": "Calculadora de IPC personal basada en datos del INE"
+    },
+    "tech": "TypeScript",
+    "url": "https://github.com/jenarvaezg/tu-ipc",
+    "homepage": "https://tu-ipc.es"
+  },
+  {
+    "name": "cunhaobot",
+    "description": {
+      "en": "Telegram bot that talks like a Spanish cunado",
+      "es": "Bot de Telegram que habla como un cunado"
+    },
+    "tech": "Python",
+    "url": "https://github.com/jenarvaezg/cunhaobot"
+  }
+]

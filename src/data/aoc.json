@@ -1,0 +1,9 @@
+[
+  { "year": 2025, "lang": "TypeScript", "repo": "aoc2025" },
+  { "year": 2024, "lang": "Python", "repo": "aoc2024" },
+  { "year": 2023, "lang": "Python", "repo": "aoc2023" },
+  { "year": 2022, "lang": "Rust", "repo": "aoc2022" },
+  { "year": 2021, "lang": "Go", "repo": "aoc2021" },
+  { "year": 2020, "lang": "Rust", "repo": "aoc2020" },
+  { "year": 2019, "lang": "Elixir", "repo": "adventofcode" }
+]

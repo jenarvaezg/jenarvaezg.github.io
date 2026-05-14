@@ -206,70 +206,20 @@ export const skillLabels: Record<Lang, Record<string, string>> = {
   },
 };
 
+import projectsData from "./projects.json";
+import aocData from "./aoc.json";
+
 export interface Project {
   name: string;
   description: Record<Lang, string>;
   tech: string;
   url: string;
   homepage?: string;
-  stars: number;
 }
 
-export const projects: Project[] = [
-  {
-    name: "loquevotan",
-    description: {
-      en: "Explore how each representative votes in the Spanish Congress. Parliamentary transparency for citizens.",
-      es: "Consulta como vota cada diputado en el Congreso. Transparencia parlamentaria para la ciudadania.",
-    },
-    tech: "Vue / Python",
-    url: "https://github.com/jenarvaezg/loquevotan",
-    homepage: "https://loquevotan.es",
-    stars: 0,
-  },
-  {
-    name: "cuentas-publicas",
-    description: {
-      en: "Interactive dashboard of Spain's public finances — debt, pensions & COFOG spending",
-      es: "Dashboard fiscal interactivo de Espana — deuda, pensiones y gasto publico COFOG",
-    },
-    tech: "TypeScript",
-    url: "https://github.com/jenarvaezg/cuentas-publicas",
-    homepage: "https://cuentas-publicas.es",
-    stars: 0,
-  },
-  {
-    name: "tu-ipc",
-    description: {
-      en: "Personal CPI calculator based on Spain's INE data",
-      es: "Calculadora de IPC personal basada en datos del INE",
-    },
-    tech: "TypeScript",
-    url: "https://github.com/jenarvaezg/tu-ipc",
-    homepage: "https://tu-ipc.es",
-    stars: 2,
-  },
-  {
-    name: "cunhaobot",
-    description: {
-      en: "Telegram bot that talks like a Spanish cunado — 6 stars, peak open source",
-      es: "Bot de Telegram que habla como un cunado — 6 estrellas, el pico del open source",
-    },
-    tech: "Python",
-    url: "https://github.com/jenarvaezg/cunhaobot",
-    stars: 6,
-  },
-];
+export const projects: Project[] = projectsData;
 
-export const adventOfCode = [
-  { year: 2025, lang: "TypeScript" },
-  { year: 2024, lang: "Python" },
-  { year: 2023, lang: "Python" },
-  { year: 2022, lang: "Rust" },
-  { year: 2021, lang: "Go" },
-  { year: 2020, lang: "Rust" },
-  { year: 2019, lang: "Elixir" },
-];
+export const adventOfCode: { year: number; lang: string; repo: string }[] = aocData;
 
 export interface Education {
   institution: string;
