@@ -1,73 +1,141 @@
 ---
 import type { Lang } from "@/data/resume";
-import { projects, adventOfCode, nav } from "@/data/resume";
+import { projects, adventOfCode, nav, ui, projectCategories } from "@/data/resume";
 
 interface Props {
   lang: Lang;
 }
 
 const { lang } = Astro.props;
+const t = ui[lang];
+const categoryLabels = projectCategories[lang];
+
+const spotlight = projects.find((p) => p.spotlight);
+const rest = projects.filter((p) => p !== spotlight);
+const grouped = Object.keys(categoryLabels)
+  .map((key) => ({
+    key,
+    label: categoryLabels[key],
+    items: rest.filter((p) => p.category === key),
+  }))
+  .filter((group) => group.items.length > 0);
 ---
 
-<section id="projects" class="px-6 py-24">
-  <div class="mx-auto max-w-3xl">
-    <h2 class="mb-12 font-heading text-3xl">
-      {nav[lang].projects}
-    </h2>
+<section id="projects" class="border-t border-rule px-6 py-16 sm:py-20">
+  <div class="mx-auto max-w-4xl">
+    <div class="mb-10 flex items-baseline justify-between gap-4">
+      <h2 class="font-heading text-2xl font-semibold sm:text-3xl">
+        {nav[lang].projects}
+      </h2>
+      <span class="font-mono text-xs text-ink-soft">{projects.length} {t.repos}</span>
+    </div>
 
-    <div class="divide-y divide-border">
-      {projects.map((project) => (
-        <div class="py-5 first:pt-0 last:pb-0">
-          <div class="mb-2 flex items-center justify-between">
+    {spotlight && (
+      <article class="mb-12 rounded-[4px] border border-ink/25 bg-card p-6 sm:p-8">
+        <div class="mb-4 flex flex-wrap items-center gap-3">
+          <p class="font-mono text-xs font-medium tracking-widest text-ink-soft uppercase">
+            {t.nowBuilding}
+          </p>
+          <span class="-rotate-2 rounded-[2px] border border-stamp px-1.5 py-0.5 font-mono text-[10px] font-medium tracking-[0.2em] text-stamp uppercase">
+            {t.live}
+          </span>
+        </div>
+        <h3 class="mb-2 font-heading text-3xl font-semibold">
+          {spotlight.name}
+        </h3>
+        <p class="mb-5 max-w-2xl text-base leading-relaxed text-ink-soft">
+          {spotlight.description[lang]}
+        </p>
+        {spotlight.spotlight && (
+          <ul class="mb-6 grid gap-x-8 gap-y-2 sm:grid-cols-2">
+            {spotlight.spotlight.highlights[lang].map((highlight) => (
+              <li class="flex gap-2.5 text-sm leading-relaxed text-ink-soft">
+                <span class="mt-[0.65rem] h-px w-3 shrink-0 bg-market"></span>
+                {highlight}
+              </li>
+            ))}
+          </ul>
+        )}
+        <div class="flex flex-wrap items-center gap-3">
+          {spotlight.homepage && (
             <a
-              href={project.url}
+              href={spotlight.homepage}
               target="_blank"
               rel="noopener noreferrer"
-              class="font-semibold text-text-primary transition-colors hover:text-accent"
+              class="inline-flex items-center gap-2 rounded-[3px] bg-market px-4 py-2.5 font-mono text-xs font-medium tracking-wider text-paper uppercase transition-colors hover:bg-market-deep"
             >
-              {project.name}
+              {t.openApp} ↗
             </a>
-            <a href={project.url} target="_blank" rel="noopener noreferrer" class="text-text-secondary transition-colors hover:text-accent">
-              <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" /></svg>
-            </a>
-          </div>
-          <p class="mb-2 text-sm text-text-secondary">
-            {project.description[lang]}
-          </p>
-          <div class="flex items-center gap-2">
-            <span class="rounded-md bg-surface px-2.5 py-1 text-xs text-text-secondary">
-              {project.tech}
-            </span>
-            {project.homepage && (
-              <a
-                href={project.homepage}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="text-xs font-medium text-accent transition-colors hover:text-amber-500"
-              >
-                {lang === "en" ? "Live" : "Ver"} →
-              </a>
-            )}
+          )}
+          <a
+            href={spotlight.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 rounded-[3px] border border-rule px-4 py-2.5 font-mono text-xs font-medium tracking-wider uppercase transition-colors hover:border-market hover:text-market"
+          >
+            {t.source}
+          </a>
+          <span class="ml-auto font-mono text-xs text-ink-soft">{spotlight.tech}</span>
+        </div>
+      </article>
+    )}
+
+    <div class="space-y-10">
+      {grouped.map((group) => (
+        <div>
+          <h3 class="mb-4 font-mono text-xs font-medium tracking-widest text-ink-soft uppercase">
+            {group.label}
+          </h3>
+          <div class="divide-y divide-rule border-y border-rule">
+            {group.items.map((project) => (
+              <div class="grid gap-1 py-4 sm:grid-cols-[10rem_1fr_auto] sm:items-baseline sm:gap-6">
+                <a
+                  href={project.homepage ?? project.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="font-semibold text-ink underline decoration-rule underline-offset-4 transition-colors hover:text-market hover:decoration-market"
+                >
+                  {project.name}
+                </a>
+                <p class="text-sm leading-relaxed text-ink-soft">
+                  {project.description[lang]}
+                </p>
+                <div class="flex items-baseline gap-3 font-mono text-xs text-ink-soft">
+                  <span>{project.tech}</span>
+                  {project.homepage && (
+                    <a
+                      href={project.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="transition-colors hover:text-market"
+                    >
+                      {t.source} ↗
+                    </a>
+                  )}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       ))}
     </div>
 
-    {/* Advent of Code */}
-    <div class="mt-12">
-      <h3 class="mb-4 text-sm font-semibold uppercase tracking-wide text-text-primary">
-        {lang === "en" ? "Advent of Code" : "Advent of Code"}
-      </h3>
-      <div class="flex flex-wrap gap-2">
+    <div class="mt-14">
+      <div class="mb-4 flex items-baseline justify-between gap-4">
+        <h3 class="font-mono text-xs font-medium tracking-widest text-ink-soft uppercase">
+          Advent of Code
+        </h3>
+        <span class="font-mono text-xs text-ink-soft">{t.aocNote}</span>
+      </div>
+      <div class="flex flex-wrap gap-x-6 gap-y-2 border-y border-rule py-3">
         {adventOfCode.map((entry) => (
           <a
             href={`https://github.com/jenarvaezg/${entry.repo}`}
             target="_blank"
             rel="noopener noreferrer"
-            class="flex items-center gap-1.5 rounded-md bg-surface px-2.5 py-1 text-xs text-text-secondary transition-colors hover:text-text-primary"
+            class="font-mono text-xs text-ink-soft transition-colors hover:text-market"
           >
-            <span class="font-medium">{entry.year}</span>
-            <span class="opacity-70">{entry.lang}</span>
+            <span class="font-medium text-ink">{entry.year}</span> {entry.lang}
           </a>
         ))}
       </div>

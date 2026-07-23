@@ -1,38 +1,40 @@
 ---
 import type { Lang } from "@/data/resume";
-import { education, nav } from "@/data/resume";
+import { education, nav, ui } from "@/data/resume";
 
 interface Props {
   lang: Lang;
 }
 
 const { lang } = Astro.props;
+const t = ui[lang];
 ---
 
-<section id="education" class="px-6 py-24">
-  <div class="mx-auto max-w-3xl">
-    <h2 class="mb-12 font-heading text-3xl">
-      {nav[lang].education}
-    </h2>
+<section id="education" class="border-t border-rule px-6 py-16 sm:py-20">
+  <div class="mx-auto max-w-4xl">
+    <div class="mb-10 flex items-baseline justify-between gap-4">
+      <h2 class="font-heading text-2xl font-semibold sm:text-3xl">
+        {nav[lang].education}
+      </h2>
+      <span class="font-mono text-xs text-ink-soft">{education.length} {t.degrees}</span>
+    </div>
 
-    <div class="space-y-8">
+    <div class="divide-y divide-rule">
       {education.map((edu) => (
-        <div>
-          <p class="mb-1 text-xs font-medium tracking-wide text-text-secondary uppercase">
-            {edu.period}
-          </p>
-          <h3 class="text-lg font-semibold text-text-primary">
-            {edu.degree[lang]}
-          </h3>
-          <p class="text-sm font-medium text-accent">
-            {edu.institution}
-          </p>
-          {edu.description && (
-            <p class="mt-2 text-sm text-text-secondary">
-              {edu.description[lang]}
-            </p>
-          )}
-        </div>
+        <article class="grid gap-2 py-6 first:pt-0 last:pb-0 sm:grid-cols-[10rem_1fr] sm:gap-6">
+          <p class="font-mono text-xs leading-6 text-ink-soft">{edu.period}</p>
+          <div>
+            <h3 class="text-lg font-semibold text-ink">
+              {edu.degree[lang]}
+              <span class="font-normal text-ink-soft"> — {edu.institution}</span>
+            </h3>
+            {edu.description && (
+              <p class="mt-1.5 text-sm leading-relaxed text-ink-soft">
+                {edu.description[lang]}
+              </p>
+            )}
+          </div>
+        </article>
       ))}
     </div>
   </div>

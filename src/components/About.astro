@@ -1,6 +1,6 @@
 ---
 import type { Lang } from "@/data/resume";
-import { about, nav } from "@/data/resume";
+import { about, meta, nav } from "@/data/resume";
 
 interface Props {
   lang: Lang;
@@ -9,12 +9,15 @@ interface Props {
 const { lang } = Astro.props;
 ---
 
-<section id="about" class="px-6 py-24">
-  <div class="mx-auto max-w-3xl">
-    <h2 class="mb-8 font-heading text-3xl">
-      {nav[lang].about}
-    </h2>
-    <p class="text-lg leading-relaxed text-text-secondary">
+<section id="about" class="border-t border-rule px-6 py-16 sm:py-20">
+  <div class="mx-auto max-w-4xl">
+    <div class="mb-8 flex items-baseline justify-between gap-4">
+      <h2 class="font-heading text-2xl font-semibold sm:text-3xl">
+        {nav[lang].about}
+      </h2>
+      <span class="font-mono text-xs text-ink-soft">{meta.location}</span>
+    </div>
+    <p class="max-w-2xl text-lg leading-relaxed text-ink-soft">
       {about[lang]}
     </p>
   </div>

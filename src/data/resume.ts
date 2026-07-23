@@ -11,12 +11,12 @@ export const meta = {
 
 export const hero: Record<Lang, { title: string; subtitle: string }> = {
   en: {
-    title: "Staff Engineer",
+    title: "Founding Engineer / Tech Lead @ Reveni",
     subtitle:
       "Building products from zero to scale. Security background, economics curiosity.",
   },
   es: {
-    title: "Staff Engineer",
+    title: "Founding Engineer / Tech Lead @ Reveni",
     subtitle:
       "Construyendo productos de cero a escala. Formacion en seguridad, curiosidad por la economia.",
   },
@@ -285,6 +285,58 @@ export const languages: Language[] = [
     name: { en: "English", es: "Ingles" },
     level: { en: "Bilingual", es: "Bilingue" },
   },
+];
+
+export const ui: Record<Lang, Record<string, string>> = {
+  en: {
+    nowBuilding: "Now building",
+    live: "live",
+    openApp: "Open the app",
+    source: "Source",
+    website: "Website",
+    chartCaption: "Career, plotted — still compounding.",
+    categories: "categories",
+    repos: "repos",
+    degrees: "degrees",
+    present: "present",
+    downloadCV: "Download CV",
+    aocNote: "A different language every December",
+  },
+  es: {
+    nowBuilding: "Ahora construyendo",
+    live: "en vivo",
+    openApp: "Abrir la app",
+    source: "Codigo",
+    website: "Web",
+    chartCaption: "Una carrera, graficada — sigue componiendo.",
+    categories: "categorias",
+    repos: "repos",
+    degrees: "titulos",
+    present: "presente",
+    downloadCV: "Descargar CV",
+    aocNote: "Un lenguaje distinto cada diciembre",
+  },
+};
+
+export const projectCategories: Record<Lang, Record<string, string>> = {
+  en: {
+    "civic-tech": "Civic tech for Spain",
+    "personal-finance": "Personal finance",
+    fun: "Just for fun",
+  },
+  es: {
+    "civic-tech": "Tech civica para Espana",
+    "personal-finance": "Finanzas personales",
+    fun: "Por pura diversion",
+  },
+};
+
+export const careerMilestones: { year: string; label: Record<Lang, string> }[] = [
+  { year: "2012", label: { en: "Telematics", es: "Telematica" } },
+  { year: "2016", label: { en: "Security", es: "Seguridad" } },
+  { year: "2019", label: { en: "Fintech", es: "Fintech" } },
+  { year: "2022", label: { en: "Reveni", es: "Reveni" } },
+  { year: "2026", label: { en: "worthline", es: "worthline" } },
 ];
 
 export const nav: Record<Lang, Record<string, string>> = {

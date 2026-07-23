@@ -1,45 +1,51 @@
 ---
 import type { Lang } from "@/data/resume";
-import { experience, nav } from "@/data/resume";
+import { experience, nav, ui } from "@/data/resume";
 
 interface Props {
   lang: Lang;
 }
 
 const { lang } = Astro.props;
+const t = ui[lang];
+
+const firstYear = Math.min(
+  ...experience.map((job) => Number(job.period.match(/\d{4}/)?.[0] ?? Infinity)),
+);
 ---
 
-<section id="experience" class="px-6 py-24">
-  <div class="mx-auto max-w-3xl">
-    <h2 class="mb-12 font-heading text-3xl">
-      {nav[lang].experience}
-    </h2>
+<section id="experience" class="border-t border-rule px-6 py-16 sm:py-20">
+  <div class="mx-auto max-w-4xl">
+    <div class="mb-10 flex items-baseline justify-between gap-4">
+      <h2 class="font-heading text-2xl font-semibold sm:text-3xl">
+        {nav[lang].experience}
+      </h2>
+      <span class="font-mono text-xs text-ink-soft">{firstYear} → {t.present}</span>
+    </div>
 
-    <div class="relative border-l border-border pl-8">
+    <div class="divide-y divide-rule">
       {experience.map((job) => (
-        <div class="relative mb-10 last:mb-0">
-          <div class="absolute -left-[calc(2rem+5px)] top-1.5 h-2.5 w-2.5 rounded-full border-2 border-accent bg-[#0c0a09]"></div>
-
-          <p class="mb-1 text-xs font-medium tracking-wide text-text-secondary/60 uppercase">
+        <article class="grid gap-2 py-7 first:pt-0 last:pb-0 sm:grid-cols-[10rem_1fr] sm:gap-6">
+          <p class="font-mono text-xs leading-6 text-ink-soft">
             {job.period}
           </p>
-          <h3 class="text-lg font-semibold text-text-primary">
-            {job.role[lang]}
-          </h3>
-          <p class="mb-3 text-sm font-medium text-accent">
-            {job.company}
-          </p>
-          {job.bullets && (
-            <ul class="space-y-1.5">
-              {job.bullets[lang].map((bullet) => (
-                <li class="flex gap-2.5 text-sm leading-relaxed text-text-secondary/80">
-                  <span class="mt-2 h-1 w-1 shrink-0 rounded-full bg-text-secondary/50"></span>
-                  {bullet}
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
+          <div>
+            <h3 class="text-lg font-semibold text-ink">
+              {job.role[lang]}
+              <span class="font-normal text-ink-soft"> — {job.company}</span>
+            </h3>
+            {job.bullets && (
+              <ul class="mt-3 space-y-1.5">
+                {job.bullets[lang].map((bullet) => (
+                  <li class="flex gap-2.5 text-sm leading-relaxed text-ink-soft">
+                    <span class="mt-[0.65rem] h-px w-3 shrink-0 bg-market"></span>
+                    {bullet}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        </article>
       ))}
     </div>
   </div>

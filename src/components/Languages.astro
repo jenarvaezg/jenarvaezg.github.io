@@ -9,17 +9,17 @@ interface Props {
 const { lang } = Astro.props;
 ---
 
-<section id="languages" class="px-6 py-24">
-  <div class="mx-auto max-w-3xl">
-    <h2 class="mb-8 font-heading text-3xl">
+<section id="languages" class="border-t border-rule px-6 py-16 sm:py-20">
+  <div class="mx-auto max-w-4xl">
+    <h2 class="mb-8 font-heading text-2xl font-semibold sm:text-3xl">
       {nav[lang].languages}
     </h2>
 
-    <div class="flex gap-12">
+    <div class="divide-y divide-rule">
       {languages.map((l) => (
-        <div>
-          <p class="text-lg font-semibold text-text-primary">{l.name[lang]}</p>
-          <p class="text-sm text-text-secondary">{l.level[lang]}</p>
+        <div class="grid gap-1 py-3 first:pt-0 last:pb-0 sm:grid-cols-[10rem_1fr] sm:gap-6">
+          <p class="font-medium text-ink">{l.name[lang]}</p>
+          <p class="font-mono text-sm text-ink-soft">{l.level[lang]}</p>
         </div>
       ))}
     </div>

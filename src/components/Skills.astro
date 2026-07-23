@@ -1,6 +1,6 @@
 ---
 import type { Lang } from "@/data/resume";
-import { skills, skillLabels, nav } from "@/data/resume";
+import { skills, skillLabels, nav, ui } from "@/data/resume";
 
 interface Props {
   lang: Lang;
@@ -8,27 +8,28 @@ interface Props {
 
 const { lang } = Astro.props;
 const labels = skillLabels[lang];
+const t = ui[lang];
+const categoryCount = Object.keys(skills).length;
 ---
 
-<section id="skills" class="px-6 py-24">
-  <div class="mx-auto max-w-3xl">
-    <h2 class="mb-12 font-heading text-3xl">
-      {nav[lang].skills}
-    </h2>
+<section id="skills" class="border-t border-rule px-6 py-16 sm:py-20">
+  <div class="mx-auto max-w-4xl">
+    <div class="mb-10 flex items-baseline justify-between gap-4">
+      <h2 class="font-heading text-2xl font-semibold sm:text-3xl">
+        {nav[lang].skills}
+      </h2>
+      <span class="font-mono text-xs text-ink-soft">{categoryCount} {t.categories}</span>
+    </div>
 
-    <div class="grid gap-8 sm:grid-cols-2">
+    <div class="divide-y divide-rule">
       {Object.entries(skills).map(([key, items]) => (
-        <div>
-          <h3 class="mb-3 text-sm font-semibold text-text-primary uppercase tracking-wide">
+        <div class="grid gap-1.5 py-4 first:pt-0 last:pb-0 sm:grid-cols-[10rem_1fr] sm:gap-6">
+          <h3 class="font-mono text-xs font-medium leading-6 tracking-wide text-ink uppercase">
             {labels[key]}
           </h3>
-          <div class="flex flex-wrap gap-2">
-            {items.map((skill: string) => (
-              <span class="rounded bg-surface/60 px-2 py-1 text-sm text-text-secondary">
-                {skill}
-              </span>
-            ))}
-          </div>
+          <p class="font-mono text-sm leading-6 text-ink-soft">
+            {items.join(" · ")}
+          </p>
         </div>
       ))}
     </div>

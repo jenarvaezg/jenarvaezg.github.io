@@ -1,14 +1,18 @@
 @import "tailwindcss";
 
 @theme {
-  --color-surface: #18181b;
-  --color-surface-hover: #27272a;
-  --color-border: #3f3f46;
-  --color-text-primary: #fafaf9;
-  --color-text-secondary: #a8a29e;
-  --color-accent: #d97706;
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-heading: "Instrument Serif", Georgia, serif;
+  --color-paper: #f2f4ee;
+  --color-card: #f8faf3;
+  --color-panel: #e9ede0;
+  --color-ink: #1a2e23;
+  --color-ink-soft: #53655b;
+  --color-rule: #c6d1bf;
+  --color-market: #0e7b44;
+  --color-market-deep: #0a5c33;
+  --color-stamp: #b3382e;
+  --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-heading: "IBM Plex Serif", Georgia, serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
 }
 
 html {
@@ -16,7 +20,78 @@ html {
 }
 
 body {
-  background-color: #0c0a09;
-  color: var(--color-text-primary);
+  background-color: var(--color-paper);
+  color: var(--color-ink);
   font-family: var(--font-sans);
+}
+
+::selection {
+  background-color: var(--color-market);
+  color: var(--color-paper);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-market);
+  outline-offset: 2px;
+}
+
+/* Hero chart draw-in */
+.worth-line {
+  /* polyline declares pathLength="1000" so these values are normalized */
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: draw-line 1.6s ease-out 0.2s forwards;
+}
+
+.worth-dot {
+  opacity: 0;
+  animation: fade-in 0.4s ease-out forwards;
+}
+
+.worth-dot-pulse {
+  animation: pulse-dot 2.4s ease-in-out 2.2s infinite;
+  transform-origin: center;
+  transform-box: fill-box;
+}
+
+@keyframes draw-line {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes fade-in {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes pulse-dot {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.8);
+    opacity: 0.6;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .worth-line {
+    stroke-dasharray: none;
+    stroke-dashoffset: 0;
+    animation: none;
+  }
+  .worth-dot {
+    opacity: 1;
+    animation: none;
+  }
+  .worth-dot-pulse {
+    animation: none;
+  }
 }
