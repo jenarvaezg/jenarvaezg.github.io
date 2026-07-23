@@ -215,6 +215,10 @@ export interface Project {
   tech: string;
   url: string;
   homepage?: string;
+  /** Grouping key for the profile README; allowed values validated in scripts/generate-profile-readme.mjs */
+  category: string;
+  /** At most one project carries this; rendered as the "Now building" block in the profile README */
+  spotlight?: { highlights: Record<Lang, string[]> };
 }
 
 export const projects: Project[] = projectsData;

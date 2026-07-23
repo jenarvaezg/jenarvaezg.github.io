@@ -3,8 +3,13 @@
 // (the GitHub profile repo). The canonical source is src/data/projects.json + aoc.json.
 //
 // Usage:
-//   node scripts/generate-profile-readme.mjs               # print to stdout
-//   node scripts/generate-profile-readme.mjs --write PATH  # rewrite the markers in PATH
+//   node scripts/generate-profile-readme.mjs                        # print to stdout
+//   node scripts/generate-profile-readme.mjs --write PATH           # rewrite the markers in PATH
+//   node scripts/generate-profile-readme.mjs --enrich [--write PATH]
+//
+// --enrich fetches live star counts from the GitHub API (uses GITHUB_TOKEN if set).
+// Fetch failures degrade gracefully to non-enriched output, so local dry runs stay
+// deterministic and offline-safe unless the flag is passed.
 //
 // Markers in the target README (jenarvaezg/README.md):
 //   <!-- PROJECTS:START --> ... <!-- PROJECTS:END -->
@@ -21,6 +26,17 @@ const aocPath = resolve(__dirname, "../src/data/aoc.json");
 const projects = JSON.parse(readFileSync(projectsPath, "utf8"));
 const aoc = JSON.parse(readFileSync(aocPath, "utf8"));
 
+// Grouping shown in the profile README. The README is English-only (see
+// jenarvaezg/AGENTS.md), so labels live here instead of projects.json.
+const CATEGORIES = {
+  "civic-tech": "🇪🇸 Civic tech for Spain",
+  "personal-finance": "📈 Personal finance",
+  fun: "😄 Just for fun",
+};
+
+// Star counts below this read as noise; they appear once a repo earns them.
+const MIN_STARS_TO_SHOW = 3;
+
 // --- Validation ------------------------------------------------------------
 
 const errors = [];
@@ -32,6 +48,7 @@ if (!Array.isArray(projects) || projects.length === 0) {
 }
 
 const projectNames = new Set();
+let spotlightCount = 0;
 projects.forEach((p, i) => {
   const where = `projects[${i}]${p?.name ? ` (${p.name})` : ""}`;
   if (!isNonEmptyString(p?.name)) errors.push(`${where}: missing or empty 'name'`);
@@ -51,7 +68,26 @@ projects.forEach((p, i) => {
       }
     }
   }
+  if (!(p?.category in CATEGORIES)) {
+    errors.push(
+      `${where}: 'category' must be one of: ${Object.keys(CATEGORIES).join(", ")}`,
+    );
+  }
+  if (p?.spotlight !== undefined) {
+    spotlightCount += 1;
+    for (const lang of ["en", "es"]) {
+      const hl = p.spotlight?.highlights?.[lang];
+      if (!Array.isArray(hl) || hl.length === 0 || !hl.every(isNonEmptyString)) {
+        errors.push(
+          `${where}: 'spotlight.highlights.${lang}' must be a non-empty array of strings`,
+        );
+      }
+    }
+  }
 });
+if (spotlightCount > 1) {
+  errors.push(`at most one project can have 'spotlight' (found ${spotlightCount})`);
+}
 
 if (!Array.isArray(aoc) || aoc.length === 0) {
   errors.push("aoc.json must be a non-empty array");
@@ -77,16 +113,75 @@ if (errors.length > 0) {
   process.exit(1);
 }
 
+// --- Enrichment (GitHub API, opt-in via --enrich) ----------------------------
+
+const enrich = process.argv.includes("--enrich");
+const starsByName = new Map();
+
+if (enrich) {
+  const headers = { Accept: "application/vnd.github+json" };
+  if (process.env.GITHUB_TOKEN) {
+    headers.Authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
+  }
+  await Promise.all(
+    projects.map(async (p) => {
+      const match = p.url.match(/^https:\/\/github\.com\/([^/]+\/[^/]+?)\/?$/);
+      if (!match) return;
+      try {
+        const res = await fetch(`https://api.github.com/repos/${match[1]}`, {
+          headers,
+          signal: AbortSignal.timeout(10_000),
+        });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+        if (typeof data.stargazers_count === "number") {
+          starsByName.set(p.name, data.stargazers_count);
+        }
+      } catch (err) {
+        console.warn(`enrich: skipping ${p.name} (${err.message})`);
+      }
+    }),
+  );
+}
+
 // --- Generation ------------------------------------------------------------
 
-const projectsTable = [
-  "| Project | Description | Tech |",
-  "|---------|-------------|------|",
-  ...projects.map((p) => {
-    const link = p.homepage ? `[${p.name}](${p.homepage})` : `[${p.name}](${p.url})`;
-    return `| ${link} | ${p.description.en} | ${p.tech} |`;
-  }),
-].join("\n");
+const starsSuffix = (name) => {
+  const stars = starsByName.get(name);
+  return stars >= MIN_STARS_TO_SHOW ? ` ⭐ ${stars}` : "";
+};
+
+const projectLink = (p) =>
+  p.homepage ? `[${p.name}](${p.homepage})` : `[${p.name}](${p.url})`;
+
+const spotlightProject = projects.find((p) => p.spotlight);
+
+const spotlightBlock = spotlightProject
+  ? [
+      `### 🚧 Now building — ${projectLink(spotlightProject)}${
+        spotlightProject.homepage ? ` ([source](${spotlightProject.url}))` : ""
+      }${starsSuffix(spotlightProject.name)}`,
+      "",
+      spotlightProject.description.en,
+      "",
+      ...spotlightProject.spotlight.highlights.en.map((h) => `- ${h}`),
+    ]
+  : [];
+
+const groupedBlocks = Object.entries(CATEGORIES).flatMap(([key, label]) => {
+  const group = projects.filter((p) => p.category === key && p !== spotlightProject);
+  if (group.length === 0) return [];
+  return [
+    "",
+    `**${label}**`,
+    "",
+    ...group.map(
+      (p) => `- ${projectLink(p)} — ${p.description.en} \`${p.tech}\`${starsSuffix(p.name)}`,
+    ),
+  ];
+});
+
+const projectsBlock = [...spotlightBlock, ...groupedBlocks].join("\n").trim();
 
 const aocBlock = (() => {
   const sorted = [...aoc].sort((a, b) => b.year - a.year);
@@ -103,7 +198,7 @@ const aocBlock = (() => {
 })();
 
 const output = `<!-- PROJECTS:START -->
-${projectsTable}
+${projectsBlock}
 <!-- PROJECTS:END -->
 
 <!-- AOC:START -->
@@ -134,7 +229,7 @@ const replaceBlock = (src, name, replacement) => {
 let next = replaceBlock(
   original,
   "PROJECTS",
-  `<!-- PROJECTS:START -->\n${projectsTable}\n<!-- PROJECTS:END -->`,
+  `<!-- PROJECTS:START -->\n${projectsBlock}\n<!-- PROJECTS:END -->`,
 );
 next = replaceBlock(
   next,

@@ -7,6 +7,9 @@ on:
       - src/data/projects.json
       - src/data/aoc.json
       - scripts/generate-profile-readme.mjs
+  schedule:
+    # Weekly refresh of live GitHub data (stars) even without content changes.
+    - cron: "0 6 * * 1"
   workflow_dispatch:
 
 permissions:
@@ -31,7 +34,9 @@ jobs:
           node-version: 22
 
       - name: Regenerate profile README
-        run: node scripts/generate-profile-readme.mjs --write profile-repo/README.md
+        run: node scripts/generate-profile-readme.mjs --enrich --write profile-repo/README.md
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
 
       - name: Create or update rolling PR
         id: cpr

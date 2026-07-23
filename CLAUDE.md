@@ -66,17 +66,21 @@ Layout.astro → Header → Hero → About → Experience → Skills → Project
   tech: string,                          // free-form, e.g. "Vue / Python", "TypeScript"
   url: string,                           // https://github.com/jenarvaezg/<repo>
   homepage?: string,                     // optional live URL
-  stars: number                          // last-known GitHub star count (manual)
+  category: string,                      // grouping key for the profile README; allowed
+                                         // values live in scripts/generate-profile-readme.mjs
+  spotlight?: {                          // at most ONE project — rendered as the
+    highlights: { en: string[], es: string[] }  // "Now building" hero block in the README
+  }
 }
 ```
 
-Order in the array = order on the site and in the profile README. Most relevant first.
+Order in the array = order on the site and within each README category group. Most relevant first. Star counts are NOT stored here — the sync script fetches them live from the GitHub API (see below).
 
 ### Profile README sync
 
-The GitHub profile (`jenarvaezg/README.md`) renders a Featured Projects table and an Advent of Code block. Both are generated from this repo and synced **automatically** by `.github/workflows/sync-profile.yml`:
+The GitHub profile (`jenarvaezg/README.md`) renders a Featured Projects section (a "Now building" spotlight + category-grouped project lists) and an Advent of Code block. Both are generated from this repo and synced **automatically** by `.github/workflows/sync-profile.yml`:
 
-- Trigger: push to `main` that touches `src/data/projects.json`, `src/data/aoc.json`, or `scripts/generate-profile-readme.mjs` (also `workflow_dispatch`).
+- Trigger: push to `main` that touches `src/data/projects.json`, `src/data/aoc.json`, or `scripts/generate-profile-readme.mjs`; a weekly cron (Mondays 06:00 UTC) that refreshes live GitHub data; and `workflow_dispatch`.
 - Action: checks out `jenarvaezg/jenarvaezg`, runs the sync script, opens (or updates) a single rolling PR on the branch `sync/profile-readme`, and enables auto-merge.
 - Auth: needs `secrets.PROFILE_SYNC_TOKEN` — a fine-grained PAT scoped to `jenarvaezg/jenarvaezg` with `Contents: write` + `Pull requests: write`. Token expires; refresh annually.
 - Prereq in `jenarvaezg`: "Allow auto-merge" must be enabled in repo settings.
@@ -84,11 +88,14 @@ The GitHub profile (`jenarvaezg/README.md`) renders a Featured Projects table an
 For local generation / dry runs:
 
 ```bash
-npm run sync:profile                                     # print to stdout
+npm run sync:profile                                     # print to stdout (offline, deterministic)
 npm run sync:profile -- --write ../jenarvaezg/README.md  # write locally (CI does this for you)
+npm run sync:profile -- --enrich                         # also fetch live star counts (CI passes this)
 ```
 
-The script validates `projects.json` / `aoc.json` before generating: required fields present, both `en` and `es` non-empty, URLs `https://`, no duplicate `name`/`year`. Exits non-zero on validation failure — which fails the workflow and blocks any sync until the JSONs are fixed.
+`--enrich` queries the GitHub API per project (auth via `GITHUB_TOKEN` if set) and appends `⭐ N` when a repo has ≥ 3 stars; fetch failures degrade gracefully to non-enriched output. Without the flag the output is fully offline and deterministic.
+
+The script validates `projects.json` / `aoc.json` before generating: required fields present, both `en` and `es` non-empty, URLs `https://`, `category` within the allowed set, at most one `spotlight`, no duplicate `name`/`year`. Exits non-zero on validation failure — which fails the workflow and blocks any sync until the JSONs are fixed.
 
 The script replaces content between `<!-- PROJECTS:START -->`/`<!-- PROJECTS:END -->` and `<!-- AOC:START -->`/`<!-- AOC:END -->` markers. Don't hand-edit those blocks in the profile repo — they will be overwritten on the next push.
 
@@ -97,7 +104,7 @@ The script replaces content between `<!-- PROJECTS:START -->`/`<!-- PROJECTS:END
 | Workflow | Trigger | Actions |
 |----------|---------|---------|
 | `deploy.yml` | Push to `main` | `npm ci` → `npm run check` → `npm run build` → deploy `dist/` to GitHub Pages (Node 22). |
-| `sync-profile.yml` | Push to `main` touching `src/data/projects.json`, `src/data/aoc.json`, or `scripts/generate-profile-readme.mjs` | Regenerates the profile README and opens a rolling auto-merging PR on `jenarvaezg/jenarvaezg`. See [Profile README sync](#profile-readme-sync). |
+| `sync-profile.yml` | Push to `main` touching `src/data/projects.json`, `src/data/aoc.json`, or `scripts/generate-profile-readme.mjs`; weekly cron (Mon 06:00 UTC) | Regenerates the profile README (with `--enrich` live GitHub stars) and opens a rolling auto-merging PR on `jenarvaezg/jenarvaezg`. See [Profile README sync](#profile-readme-sync). |
 
 There is no test suite; `astro check` is the only verification gate. Treat type errors as build failures.
 

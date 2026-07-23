@@ -6,7 +6,23 @@
       "es": "Dashboard de patrimonio neto local-first para finanzas personales y familiares — activos, deudas, niveles de liquidez, analisis de cartera y progreso FIRE."
     },
     "tech": "TypeScript / Next.js",
-    "url": "https://github.com/jenarvaezg/worthline"
+    "url": "https://github.com/jenarvaezg/worthline",
+    "homepage": "https://worthline-web.vercel.app",
+    "category": "personal-finance",
+    "spotlight": {
+      "highlights": {
+        "en": [
+          "One dashboard for your whole household: shared ownership, liquidity tiers and fund look-through",
+          "Tracks FIRE progress against your own targets",
+          "Bun + Turborepo monorepo, RSC-first Next.js, mobile-ready domain packages"
+        ],
+        "es": [
+          "Un solo dashboard para todo el hogar: propiedad compartida, niveles de liquidez y look-through de fondos",
+          "Sigue tu progreso FIRE contra tus propios objetivos",
+          "Monorepo Bun + Turborepo, Next.js RSC-first, paquetes de dominio listos para movil"
+        ]
+      }
+    }
   },
   {
     "name": "loquevotan",
@@ -16,7 +32,8 @@
     },
     "tech": "Vue / Python",
     "url": "https://github.com/jenarvaezg/loquevotan",
-    "homepage": "https://loquevotan.es"
+    "homepage": "https://loquevotan.es",
+    "category": "civic-tech"
   },
   {
     "name": "cuentas-publicas",
@@ -26,7 +43,8 @@
     },
     "tech": "TypeScript",
     "url": "https://github.com/jenarvaezg/cuentas-publicas",
-    "homepage": "https://cuentas-publicas.es"
+    "homepage": "https://cuentas-publicas.es",
+    "category": "civic-tech"
   },
   {
     "name": "tu-ipc",
@@ -36,7 +54,8 @@
     },
     "tech": "TypeScript",
     "url": "https://github.com/jenarvaezg/tu-ipc",
-    "homepage": "https://tu-ipc.es"
+    "homepage": "https://tu-ipc.es",
+    "category": "civic-tech"
   },
   {
     "name": "cunhaobot",
@@ -45,6 +64,7 @@
       "es": "Bot de Telegram que habla como un cunado — el que sienta catedra en cualquier sobremesa"
     },
     "tech": "Python",
-    "url": "https://github.com/jenarvaezg/cunhaobot"
+    "url": "https://github.com/jenarvaezg/cunhaobot",
+    "category": "fun"
   }
 ]
