@@ -81,9 +81,8 @@ Order in the array = order on the site and within each README category group. Mo
 The GitHub profile (`jenarvaezg/README.md`) renders a Featured Projects section (a "Now building" spotlight + category-grouped project lists) and an Advent of Code block. Both are generated from this repo and synced **automatically** by `.github/workflows/sync-profile.yml`:
 
 - Trigger: push to `main` that touches `src/data/projects.json`, `src/data/aoc.json`, or `scripts/generate-profile-readme.mjs`; a weekly cron (Mondays 06:00 UTC) that refreshes live GitHub data; and `workflow_dispatch`.
-- Action: checks out `jenarvaezg/jenarvaezg`, runs the sync script, opens (or updates) a single rolling PR on the branch `sync/profile-readme`, and enables auto-merge.
+- Action: checks out `jenarvaezg/jenarvaezg`, runs the sync script, opens (or updates) a single rolling PR on the branch `sync/profile-readme`, and squash-merges it immediately (the profile repo has no checks; GitHub's auto-merge API can't be used there because it requires branch protection).
 - Auth: needs `secrets.PROFILE_SYNC_TOKEN` — a fine-grained PAT scoped to `jenarvaezg/jenarvaezg` with `Contents: write` + `Pull requests: write`. Token expires; refresh annually.
-- Prereq in `jenarvaezg`: "Allow auto-merge" must be enabled in repo settings.
 
 For local generation / dry runs:
 
@@ -104,7 +103,7 @@ The script replaces content between `<!-- PROJECTS:START -->`/`<!-- PROJECTS:END
 | Workflow | Trigger | Actions |
 |----------|---------|---------|
 | `deploy.yml` | Push to `main` | `npm ci` → `npm run check` → `npm run build` → deploy `dist/` to GitHub Pages (Node 22). |
-| `sync-profile.yml` | Push to `main` touching `src/data/projects.json`, `src/data/aoc.json`, or `scripts/generate-profile-readme.mjs`; weekly cron (Mon 06:00 UTC) | Regenerates the profile README (with `--enrich` live GitHub stars) and opens a rolling auto-merging PR on `jenarvaezg/jenarvaezg`. See [Profile README sync](#profile-readme-sync). |
+| `sync-profile.yml` | Push to `main` touching `src/data/projects.json`, `src/data/aoc.json`, or `scripts/generate-profile-readme.mjs`; weekly cron (Mon 06:00 UTC) | Regenerates the profile README (with `--enrich` live GitHub stars) and opens + squash-merges a rolling PR on `jenarvaezg/jenarvaezg`. See [Profile README sync](#profile-readme-sync). |
 
 There is no test suite; `astro check` is the only verification gate. Treat type errors as build failures.
 

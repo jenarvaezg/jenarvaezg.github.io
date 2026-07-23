@@ -55,11 +55,11 @@ jobs:
             Triggered by commit ${{ github.sha }}.
           delete-branch: true
 
-      - name: Enable auto-merge
+      # The profile repo has no checks and no branch protection, so GitHub's
+      # auto-merge API is unavailable there — merge the PR right away instead.
+      - name: Merge sync PR
         if: steps.cpr.outputs.pull-request-number
-        uses: peter-evans/enable-pull-request-automerge@v3
-        with:
-          token: ${{ secrets.PROFILE_SYNC_TOKEN }}
-          repository: jenarvaezg/jenarvaezg
-          pull-request-number: ${{ steps.cpr.outputs.pull-request-number }}
-          merge-method: squash
+        run: gh pr merge --squash --delete-branch "$PR_NUMBER" -R jenarvaezg/jenarvaezg
+        env:
+          GH_TOKEN: ${{ secrets.PROFILE_SYNC_TOKEN }}
+          PR_NUMBER: ${{ steps.cpr.outputs.pull-request-number }}
