@@ -1,5 +1,14 @@
 [
   {
+    "name": "worthline",
+    "description": {
+      "en": "Local-first net worth dashboard for personal and household finances — tracks assets, debts, liquidity tiers, fund look-through and FIRE progress.",
+      "es": "Dashboard de patrimonio neto local-first para finanzas personales y familiares — activos, deudas, niveles de liquidez, analisis de cartera y progreso FIRE."
+    },
+    "tech": "TypeScript / Next.js",
+    "url": "https://github.com/jenarvaezg/worthline"
+  },
+  {
     "name": "loquevotan",
     "description": {
       "en": "Explore how each representative votes in the Spanish Congress. Parliamentary transparency for citizens.",

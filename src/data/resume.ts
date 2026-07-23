@@ -162,7 +162,7 @@ export const experience: Job[] = [
 
 export const skills: Record<string, string[]> = {
   backend: ["Python", "Go", "Node.js", "Django", "REST", "gRPC", "GraphQL"],
-  frontend: ["React", "TypeScript", "JavaScript", "HTML/CSS"],
+  frontend: ["React", "Next.js", "TypeScript", "JavaScript", "HTML/CSS"],
   infrastructure: [
     "Docker",
     "Kubernetes",
