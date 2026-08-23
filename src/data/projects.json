@@ -25,6 +25,16 @@
     }
   },
   {
+    "name": "coindex",
+    "description": {
+      "en": "Local-first Android app that organises a Numista silver collection into proposals and sheets: which pieces of each catalogued series are in, and which are missing.",
+      "es": "App Android local-first que organiza una colección de plata de Numista en propuestas y láminas: qué piezas están y cuáles faltan de cada serie catalogada."
+    },
+    "tech": "Kotlin / Android",
+    "url": "https://github.com/jenarvaezg/coindex",
+    "category": "personal-finance"
+  },
+  {
     "name": "loquevotan",
     "description": {
       "en": "Explore how each representative votes in the Spanish Congress. Parliamentary transparency for citizens.",
