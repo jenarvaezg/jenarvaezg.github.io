@@ -13,18 +13,18 @@ export const hero: Record<Lang, { title: string; subtitle: string }> = {
   en: {
     title: "Founding Engineer / Tech Lead @ Reveni",
     subtitle:
-      "Building products from zero to scale. Security background, economics curiosity.",
+      "Building products from zero to scale. Lately: LLM agents in production. Security background, economics curiosity.",
   },
   es: {
     title: "Founding Engineer / Tech Lead @ Reveni",
     subtitle:
-      "Construyendo productos de cero a escala. Formación en seguridad, curiosidad por la economía.",
+      "Construyendo productos de cero a escala. Últimamente: agentes LLM en producción. Formación en seguridad, curiosidad por la economía.",
   },
 };
 
 export const about: Record<Lang, string> = {
-  en: "Founding engineer at Reveni, where I helped build the platform from the ground up as part of a small initial team that grew to 15+ engineers through Series A. Before fintech, I spent years in cybersecurity — pentesting, vulnerability research, incident response. Currently finishing a Master's in Economics & Public Policy.",
-  es: "Ingeniero fundador en Reveni, donde ayudé a construir la plataforma desde cero como parte de un equipo inicial pequeño que creció a más de 15 ingenieros a través de la Serie A. Antes del fintech, pasé años en ciberseguridad — pentesting, investigación de vulnerabilidades, respuesta ante incidentes. Actualmente terminando un Máster en Economía y Políticas Públicas.",
+  en: "Founding engineer at Reveni, where I helped build the platform from the ground up as part of a small initial team that grew to 15+ engineers through Series A. Before fintech, I spent years in cybersecurity — pentesting, vulnerability research, incident response. Lately I build and operate LLM agents that write to real financial records — and the eval harness that decides which models are allowed to. Currently finishing a Master's in Economics & Public Policy.",
+  es: "Ingeniero fundador en Reveni, donde ayudé a construir la plataforma desde cero como parte de un equipo inicial pequeño que creció a más de 15 ingenieros a través de la Serie A. Antes del fintech, pasé años en ciberseguridad — pentesting, investigación de vulnerabilidades, respuesta ante incidentes. Últimamente construyo y opero agentes LLM que escriben sobre registros financieros reales, y el arnés de evaluación que decide qué modelos pueden hacerlo. Actualmente terminando un Máster en Economía y Políticas Públicas.",
 };
 
 export interface Job {

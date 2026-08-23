@@ -14,12 +14,12 @@
         "en": [
           "One dashboard for your whole household: shared ownership, liquidity tiers and fund look-through",
           "Tracks FIRE progress against your own targets",
-          "Bun + Turborepo monorepo, RSC-first Next.js, mobile-ready domain packages"
+          "A 39-tool LLM agent drafts changes to your ledger — and never applies them: a person confirms every one"
         ],
         "es": [
           "Un solo dashboard para todo el hogar: propiedad compartida, niveles de liquidez y look-through de fondos",
           "Sigue tu progreso FIRE contra tus propios objetivos",
-          "Monorepo Bun + Turborepo, Next.js RSC-first, paquetes de dominio listos para móvil"
+          "Un agente LLM con 39 herramientas propone cambios en tu libro — y nunca los aplica: cada uno lo confirma una persona"
         ]
       }
     }
