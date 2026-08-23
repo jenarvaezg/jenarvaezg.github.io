@@ -3,7 +3,7 @@
     "name": "worthline",
     "description": {
       "en": "Local-first net worth dashboard for personal and household finances — tracks assets, debts, liquidity tiers, fund look-through and FIRE progress.",
-      "es": "Dashboard de patrimonio neto local-first para finanzas personales y familiares — activos, deudas, niveles de liquidez, analisis de cartera y progreso FIRE."
+      "es": "Dashboard de patrimonio neto local-first para finanzas personales y familiares — activos, deudas, niveles de liquidez, análisis de cartera y progreso FIRE."
     },
     "tech": "TypeScript / Next.js",
     "url": "https://github.com/jenarvaezg/worthline",
@@ -14,21 +14,31 @@
         "en": [
           "One dashboard for your whole household: shared ownership, liquidity tiers and fund look-through",
           "Tracks FIRE progress against your own targets",
-          "Bun + Turborepo monorepo, RSC-first Next.js, mobile-ready domain packages"
+          "A 39-tool LLM agent drafts changes to your ledger — and never applies them: a person confirms every one"
         ],
         "es": [
           "Un solo dashboard para todo el hogar: propiedad compartida, niveles de liquidez y look-through de fondos",
           "Sigue tu progreso FIRE contra tus propios objetivos",
-          "Monorepo Bun + Turborepo, Next.js RSC-first, paquetes de dominio listos para movil"
+          "Un agente LLM con 39 herramientas propone cambios en tu libro — y nunca los aplica: cada uno lo confirma una persona"
         ]
       }
     }
   },
   {
+    "name": "coindex",
+    "description": {
+      "en": "Local-first Android app that organises a Numista silver collection into proposals and sheets: which pieces of each catalogued series are in, and which are missing.",
+      "es": "App Android local-first que organiza una colección de plata de Numista en propuestas y láminas: qué piezas están y cuáles faltan de cada serie catalogada."
+    },
+    "tech": "Kotlin / Android",
+    "url": "https://github.com/jenarvaezg/coindex",
+    "category": "personal-finance"
+  },
+  {
     "name": "loquevotan",
     "description": {
       "en": "Explore how each representative votes in the Spanish Congress. Parliamentary transparency for citizens.",
-      "es": "Consulta como vota cada diputado en el Congreso. Transparencia parlamentaria para la ciudadania."
+      "es": "Consulta cómo vota cada diputado en el Congreso. Transparencia parlamentaria para la ciudadanía."
     },
     "tech": "Vue / Python",
     "url": "https://github.com/jenarvaezg/loquevotan",
@@ -39,7 +49,7 @@
     "name": "cuentas-publicas",
     "description": {
       "en": "Interactive dashboard of Spain's public finances — debt, pensions & COFOG spending",
-      "es": "Dashboard fiscal interactivo de Espana — deuda, pensiones y gasto publico COFOG"
+      "es": "Dashboard fiscal interactivo de España — deuda, pensiones y gasto público COFOG"
     },
     "tech": "TypeScript",
     "url": "https://github.com/jenarvaezg/cuentas-publicas",
@@ -60,8 +70,8 @@
   {
     "name": "cunhaobot",
     "description": {
-      "en": "Telegram bot that talks like a Spanish cunado — the know-it-all brother-in-law parody",
-      "es": "Bot de Telegram que habla como un cunado — el que sienta catedra en cualquier sobremesa"
+      "en": "Telegram bot that talks like a Spanish cuñado — the know-it-all brother-in-law parody",
+      "es": "Bot de Telegram que habla como un cuñado — el que sienta cátedra en cualquier sobremesa"
     },
     "tech": "Python",
     "url": "https://github.com/jenarvaezg/cunhaobot",
